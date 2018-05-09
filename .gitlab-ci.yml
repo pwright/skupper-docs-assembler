@@ -1,0 +1,15 @@
+image:
+  name: antora/antora:2.0.0
+  entrypoint: [/bin/sh, -c]
+pages:
+  stage: deploy
+  only:
+  - master@antora/demo/demo-site
+  cache:
+    paths:
+    - .cache/
+  script:
+  - antora --fetch --cache-dir=.cache/antora --to-dir=public site.yml
+  artifacts:
+    paths:
+    - public/
