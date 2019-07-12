@@ -4,7 +4,7 @@ image:
 pages:
   stage: deploy
   only:
-  - master@antora/demo/demo-site
+  - master@antora/demo/docs-site
   cache:
     paths:
     - .cache/
