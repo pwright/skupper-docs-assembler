@@ -5,7 +5,7 @@
 :uri-project: https://antora.org
 :uri-org: https://gitlab.com/antora
 :uri-group: {uri-org}/demo
-:uri-repo: {uri-group}/demo-site
+:uri-repo: {uri-group}/docs-site
 :uri-demo-playbook: {uri-repo}/blob/master/site.yml
 :uri-antora-docs: https://docs.antora.org/antora/latest
 :uri-docs-install: {uri-antora-docs}/install/install-antora/
