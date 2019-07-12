@@ -7,9 +7,9 @@
 :uri-group: {uri-org}/demo
 :uri-repo: {uri-group}/demo-site
 :uri-demo-playbook: {uri-repo}/blob/master/site.yml
-:uri-antora-docs: https://docs.antora.org/antora/1.0
+:uri-antora-docs: https://docs.antora.org/antora/latest
 :uri-docs-install: {uri-antora-docs}/install/install-antora/
-:uri-docs-playbook: {uri-antora-docs}/playbook/playbook/
+:uri-docs-playbook: {uri-antora-docs}/playbook/playbook-schema/
 :uri-docs-run: {uri-antora-docs}/run-antora/
 :uri-opendevise: https://opendevise.com
 
@@ -32,7 +32,7 @@ Once you've installed Antora and {uri-demo-playbook}[saved the demo playbook] ([
 
 == Copyright and License
 
-Copyright (C) 2017-2018 OpenDevise Inc. and individual Antora Project contributors.
+Copyright (C) 2017-2019 OpenDevise Inc. and individual Antora Project contributors.
 
 Use of this software is granted under the terms of the https://www.mozilla.org/en-US/MPL/2.0/[Mozilla Public License Version 2.0] (MPL-2.0).
 See link:LICENSE[] to find the full license text.
