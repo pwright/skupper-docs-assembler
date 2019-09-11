@@ -1,5 +1,5 @@
 image:
-  name: antora/antora:2.0.0
+  name: antora/antora:2.1.1
   entrypoint: [/bin/sh, -c]
 pages:
   stage: deploy
