@@ -5,6 +5,7 @@ site:
   start_page: component-b::index.adoc
 content:
   sources:
+  # embedding empty credentials in the URL disables the Edit this Page link for any page created from this repository
   - url: https://@gitlab.com/antora/demo/demo-component-a.git
     branches: master
   - url: https://gitlab.com/antora/demo/demo-component-b.git
