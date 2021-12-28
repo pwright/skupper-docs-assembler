@@ -1,5 +1,5 @@
 image:
-  name: antora/antora:2.3.4
+  name: antora/antora:3.0.0
 pages:
   stage: deploy
   only:
@@ -8,7 +8,7 @@ pages:
     paths:
     - .cache/
   script:
-  - antora --fetch --cache-dir .cache/antora --attribute page-pagination= --to-dir public antora-playbook.yml
+  - antora --fetch --cache-dir .cache/antora --attribute page-pagination= --redirect-facility gitlab --to-dir public antora-playbook.yml
   artifacts:
     paths:
     - public/
