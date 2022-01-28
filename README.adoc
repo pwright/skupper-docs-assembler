@@ -27,7 +27,7 @@ It tells Antora where to find the Component A and Component B remote content rep
 
 == Generate the Demo Site
 
-Once you've installed Antora and {url-demo-playbook}[saved the demo playbook] ([.path]_antora-playbook.yml_) to a local directory, you're ready to {url-docs-run}[run Antora].
+After cloning this playbook project repository to your computer or setting up your own playbook for the demo site (see the {url-docs-quickstart}[Antora quickstart] for instructions) you can generate the demo site by {url-docs-run}[running Antora].
 
 == Copyright and License
 
