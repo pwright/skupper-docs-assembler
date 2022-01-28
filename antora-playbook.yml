@@ -11,8 +11,14 @@ content:
     # the same thing can be achieved by adding empty credentials (i.e., @) in front of the domain in the URL
     edit_url: false
   - url: https://gitlab.com/antora/demo/demo-component-b.git
-    branches: [v2.0, v1.0]
+    branches: [v1.0, v2.0, main]
     start_path: docs
+asciidoc:
+  attributes:
+    experimental: ''
+    idprefix: ''
+    idseparator: '-'
+    page-pagination: ''
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
