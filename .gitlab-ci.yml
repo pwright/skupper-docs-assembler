@@ -1,5 +1,5 @@
 image:
-  name: antora/antora:3.0.0
+  name: antora/antora:3.0.1
 pages:
   stage: deploy
   rules:
