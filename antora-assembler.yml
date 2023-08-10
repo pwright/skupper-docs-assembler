@@ -1,0 +1,21 @@
+# See https://gitlab.com/antora/antora-assembler for the docs
+root_level: 0
+component_versions: '*'
+build:
+  command: bundle exec asciidoctor-pdf
+  keep_aggregate_source: true
+output:
+  destinations: []
+
+asciidoc:
+  attributes:
+    experimental: ''
+    idprefix: ''
+    idseparator: '-'
+    page-pagination: ''
+    context: rhsi
+    linkroot: link
+    service-network: service network
+    image-prefix: images
+    skupper-version: 1.4.2
+    skupperoperatorname: Skupper Operator
