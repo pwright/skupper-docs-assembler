@@ -3,6 +3,9 @@ root_level: 0
 component_versions: '*'
 build:
   keep_aggregate_source: true
+  dir: ./
+  publish: false
+
 output:
   destinations: []
 
