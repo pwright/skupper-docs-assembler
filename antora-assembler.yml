@@ -19,5 +19,5 @@ asciidoc:
     linkroot: link
     service-network: service network
     image-prefix: images
-    skupper-version: 1.4.2
+    skupper-version: 1.5.0
     skupperoperatorname: Skupper Operator

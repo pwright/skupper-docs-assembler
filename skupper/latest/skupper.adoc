@@ -12,7 +12,7 @@ vlatest
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#index:::]
@@ -46,7 +46,7 @@ NOTE: This ROOT module is never published but contains partials that are used in
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#overview:index:::]
@@ -129,7 +129,7 @@ When a service is exposed, Skupper creates proxy endpoints to make that service 
 :page-relative-src-path: security.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#overview:security:::]
@@ -176,7 +176,7 @@ This means that the Skupper network is isolated from external access, preventing
 :page-relative-src-path: connectivity.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#overview:connectivity:::]
@@ -239,7 +239,7 @@ image::skupper/latest/overview/_images/many-clusters.svg[]
 :page-relative-src-path: routing.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#overview:routing:::]
@@ -299,7 +299,7 @@ Skupper uses redundant network paths and smart routing to provide highly availab
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#cli:index:::]
@@ -770,7 +770,6 @@ $ skupper expose deployment/backend --port 8080 --target-namespace east-backend
 ----
 --
 
-
 // Type: concept
 [discrete#cli:index:::exposing-services-local,id="exposing-services-local"]
 === Exposing services on the {service-network} from a local machine
@@ -789,7 +788,6 @@ This section shows how to expose a single service running locally on a {service-
 
 * A {service-network}. Only one site is required.
 * Access to the {service-network}.
-
 
 .Procedure
 
@@ -1098,7 +1096,10 @@ bindings.service:: Definition of service you want to be available on service net
 bindings.service.address:: Address on the service network, name and port.
 bindings.service.protocol:: Skupper protocol, `tcp`, `http` or `http2`.
 bindings.service.ports:: A single port that becomes available on the service network.
-bindings.service.target_ports:: A single port that you want to expose on the service network.
+bindings.service.exposeIngress:: (optional) The traffic direction, `ingress` or `egress`.
+bindings.service.tlscredentials:: (optional) The TLS certificate and key for the service.
+bindings.service.tlscertauthority:: (optional) The TLS public certificate.
+bindings.target_ports:: A single port that you want to expose on the service network.
 
 NOTE: If the local service requires more than one port, create separate bindings for each port.
 
@@ -1108,7 +1109,7 @@ forwards.service:: Definition of service you want to be available locally.
 forwards.service.address:: Address on the service network that you want to use locally, name and port.
 forwards.service.protocol:: Skupper protocol, `tcp`, `http` or `http2`.
 forwards.service.ports:: A single port that is available on the service network.
-forwards.service.target_ports:: A single port that you want to use locally.
+forwards.target_ports:: A single port that you want to use locally.
 
 NOTE: If the network service requires more than one port, create separate forwards for each port.
 
@@ -1116,7 +1117,6 @@ qdr-listeners:: Definition of skupper router listeners
 qdr-listeners.name:: Name of skupper router, typically `amqp`.
 qdr-listeners.host:: Hostname for skupper router, typically `localhost`.
 qdr-listeners.port:: Port for skupper router, typically `5672`.
-
 
 
 // Type: procedure
@@ -1146,6 +1146,8 @@ For example:
 
 [source]
 ----
+
+
 Sites:
 ├─ [local] 4dba248 - west  <1>
 │  URL: 10.96.146.236 <2>
@@ -1394,25 +1396,30 @@ $ skupper init --namespace backend
 :page-relative-src-path: skupper.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#cli-reference:skupper:::]
 == CLI reference
+[discrete#cli-reference:skupper:::skupper-kubernetes]
+=== skupper (kubernetes)
 
-.Synopsis
+[discrete#cli-reference:skupper:::synopsis]
+==== Synopsis
 
-.Options
+[discrete#cli-reference:skupper:::options]
+==== Options
 
-```
--c, --context string      The kubeconfig context to use
--h, --help                help for skupper
---kubeconfig string   Path to the kubeconfig file to use
--n, --namespace string    The Kubernetes namespace to use
---platform string     The platform type to use [kubernetes, podman]
-```
+----
+  -c, --context string      The kubeconfig context to use
+  -h, --help                help for skupper
+      --kubeconfig string   Path to the kubeconfig file to use
+  -n, --namespace string    The Kubernetes namespace to use
+      --platform string     The platform type to use [kubernetes, podman]
+----
 
-.See also
+[discrete#cli-reference:skupper:::see-also]
+==== SEE ALSO
 
 * https://skupper.io/skupper/latest/cli-reference/skupper_completion.html[skupper completion]	 - Output shell completion code for bash
 * https://skupper.io/skupper/latest/cli-reference/skupper_debug.html[skupper debug]	 - Debug skupper installation
@@ -1430,15 +1437,15 @@ $ skupper init --namespace backend
 * https://skupper.io/skupper/latest/cli-reference/skupper_update.html[skupper update]	 - Update skupper installation version
 * https://skupper.io/skupper/latest/cli-reference/skupper_version.html[skupper version]	 - Report the version of the Skupper CLI and services
 
-[discrete]
-// Auto generated by spf13/cobra on 12-Jun-2023
+[discrete#cli-reference:skupper:::auto-generated-by-spf13cobra-on-14-nov-2023]
+====== Auto generated by spf13/cobra on 14-Nov-2023
 
 :docname: index
 :page-module: declarative
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#declarative:index:::]
@@ -2106,7 +2113,7 @@ spec:
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#operator:index:::]
@@ -2271,7 +2278,7 @@ NOTE: If you deployed the Operator to a single namespace, an additional site con
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#kubernetes:index:::]
@@ -2458,7 +2465,7 @@ $ skupper debug events
 :page-relative-src-path: service-certs.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#kubernetes:service-certs:::]
@@ -2639,7 +2646,7 @@ NOTE: When certificates expire, you need to perform this procedure again with th
 :page-relative-src-path: podman.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#cli:podman:::]
@@ -2650,7 +2657,7 @@ NOTE: When certificates expire, you need to perform this procedure again with th
 [id='using-skupper-podman']
 
 
-Skupper podman allow you to create a site using containers, without requiring Kubernetes.
+Skupper podman allows you to create a site using containers, without requiring Kubernetes.
 Typically, you create a site on a Linux host, allowing you to link to and from other sites, regardless of whether those sites are running in podman or Kubernetes.
 
 NOTE: This is a preview feature and may change before becoming fully supported by https://skupper.io[skupper.io].
@@ -2689,6 +2696,23 @@ To switch back to target Kubernetes sites: `skupper switch kubernetes`
 
 * The latest `skupper` CLI is installed.
 * Podman is installed, see https://podman.io/
++
+--
+By default, Podman v4 uses Netavark which works with Skupper.
+If you are using CNI, for example, if you upgrade from Podman v3, you must also install the `podman-plugins` package.
+For example, `dnf install podman-plugins` for RPM based distributions.
+
+NOTE: CNI will be deprecated in the future in preference of Netavark.
+--
+* Podman service endpoint.
++
+--
+Use `systemctl status podman.socket` to make sure the Podman API Socket is running.
+
+Use `systemctl --user enable --now podman.socket` to start the  Podman API Socket.
+
+See link:https://github.com/containers/podman/blob/main/docs/tutorials/socket_activation.md[Podman socket activation] for information about enabling this endpoint.
+--
 
 
 . Set your session to use Skupper podman:
@@ -2884,22 +2908,27 @@ For more information, see https://skupper.io/skupper/latest/cli-podman/skupper_e
 :page-relative-src-path: skupper.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#cli-podman:skupper:::]
 == Podman Reference
+[discrete#cli-podman:skupper:::skupper-podman]
+=== skupper (podman)
 
-.Synopsis
+[discrete#cli-podman:skupper:::synopsis]
+==== Synopsis
 
-.Options
+[discrete#cli-podman:skupper:::options]
+==== Options
 
-```
--h, --help              help for skupper
---platform string   The platform type to use [kubernetes, podman]
-```
+----
+  -h, --help              help for skupper
+      --platform string   The platform type to use [kubernetes, podman]
+----
 
-.See also
+[discrete#cli-podman:skupper:::see-also]
+==== SEE ALSO
 
 * https://skupper.io/skupper/latest/cli-podman/skupper_delete.html[skupper delete]	 - Delete skupper installation
 * https://skupper.io/skupper/latest/cli-podman/skupper_expose.html[skupper expose]	 - Expose a set of pods through a Skupper address
@@ -2910,10 +2939,11 @@ For more information, see https://skupper.io/skupper/latest/cli-podman/skupper_e
 * https://skupper.io/skupper/latest/cli-podman/skupper_status.html[skupper status]	 - Report the status of the current Skupper site
 * https://skupper.io/skupper/latest/cli-podman/skupper_token.html[skupper token]	 - Manage skupper tokens
 * https://skupper.io/skupper/latest/cli-podman/skupper_unexpose.html[skupper unexpose]	 - Unexpose a set of pods previously exposed through a Skupper address
+* https://skupper.io/skupper/latest/cli-podman/skupper_update.html[skupper update]	 - Update skupper installation version
 * https://skupper.io/skupper/latest/cli-podman/skupper_version.html[skupper version]	 - Report the version of the Skupper CLI and services
 
-[discrete]
-// Auto generated by spf13/cobra on 12-Jun-2023
+[discrete#cli-podman:skupper:::auto-generated-by-spf13cobra-on-16-nov-2023]
+====== Auto generated by spf13/cobra on 16-Nov-2023
 
 :!sectids:
 == <strong>Observability</strong>
@@ -2924,7 +2954,7 @@ For more information, see https://skupper.io/skupper/latest/cli-podman/skupper_e
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#console:index:::]
@@ -3066,7 +3096,7 @@ TIP: To view information about each window, click the *?* icon.
 :page-relative-src-path: tokens.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#cli:tokens:::]
@@ -3240,7 +3270,7 @@ To recreate the link, you must first delete the link manually from the remote si
 :page-relative-src-path: native-security-options.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#cli:native-security-options:::]
@@ -3371,7 +3401,7 @@ spec:
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#policy:index:::]
@@ -3434,7 +3464,7 @@ spec:
   allowIncomingLinks: true
   allowedExposedResources:
     - "deployment/nginx"
-  allowedOutgoingLinksHostnames: [".*\\.example.com$"]
+  allowedOutgoingLinksHostnames: [".*\.example.com$"]
   allowedServices:
     - "*"
 ----
@@ -3461,7 +3491,7 @@ Note that patterns are not supported.
 ====
 Use regular expressions to create pattern matches, for example:
 
-* `.*\\.com$` matches any string ending in `.com`.
+* `.*\.com$` matches any string ending in `.com`.
 A double backslash is required to avoid issues in YAML.
 * `^abc$` matches the string `abc`.
 
@@ -3633,7 +3663,7 @@ metadata:
 spec:
   namespaces:
     - "*"
-  allowedOutgoingLinksHostnames: ['.*\\.example\\.com']
+  allowedOutgoingLinksHostnames: ['.*\.example\.com']
 ----
 
 
@@ -3764,7 +3794,7 @@ true    true                                                                    
 :page-relative-src-path: index.adoc
 :page-origin-url: https://github.com/pwright/skupper-docs.git
 :page-origin-start-path:
-:page-origin-refname: fixrootlink
+:page-origin-refname: network-status
 :page-origin-reftype: branch
 :page-origin-refhash: (worktree)
 [#troubleshooting:index:::]
@@ -3870,7 +3900,7 @@ The output shows the `backend` service and the related target of that service.
 NOTE: The related targets for services are only displayed when the target is available on the current cluster.
 --
 
-. List the events for a site:
+. List the Skupper events for a site:
 +
 --
 [source, bash]
@@ -3916,6 +3946,26 @@ TokenClaimVerification       1                                                  
 The output shows sites being linked and a service being exposed on a {service-network}.
 However, this output is most useful when reporting an issue and is included in the Skupper debug tar file.
 --
+
+. List the Kubernetes events for a site:
++
+--
+[source, bash]
+----
+kubectl get events | grep "service/skupper"
+10m         Normal    ServiceSyncEvent               service/skupper                                   Service sync receiver connection to amqps://skupper-router-local.private1.svc.cluster.local:5671 established
+10m         Normal    ServiceSyncEvent               service/skupper                                   Service sync sender connection to amqps://skupper-router-local.private1.svc.cluster.local:5671 established
+10m         Normal    ServiceControllerCreateEvent   service/skupper                                   Creating service productcatalogservice
+7m59s       Normal    TokenHandler                   service/skupper                                   Connecting using token link1
+7m54s       Normal    TokenHandler                   service/skupper                                   Connecting using token link2
+----
+
+The output shows events relating to Kubernetes resources.
+
+--
+
+
+
 
 .Additional information
 
