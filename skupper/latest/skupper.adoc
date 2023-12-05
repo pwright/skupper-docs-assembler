@@ -1,8 +1,8 @@
 [#index:::]
 = Skupper
-:revnumber: latest
+:toc:
+vlatest
 :doctype: book
-:underscore: _
 :page-component-name: skupper
 :page-component-version: latest
 :page-version: {page-component-version}
@@ -37,14 +37,6 @@ This documentation is built using Antora and contains the following Antora modul
 
 NOTE: This ROOT module is never published but contains partials that are used in various documents.
 
-:!sectids:
-== https://skupper.io/start/index.html)[Skupper - Getting started]
-:sectids:
-
-:!sectids:
-== https://skupper.io/examples/index.html)[Skupper - Examples]
-:sectids:
-
 :docname: index
 :page-module: cli
 :page-relative-src-path: index.adoc
@@ -64,7 +56,7 @@ Using the `skupper` command-line interface (CLI) allows you to create and manage
 A typical workflow is to create a site, link sites together, and expose services to the {service-network}.
 
 // Type: procedure
-[discrete#cli:index:::checking-cli,id="checking-cli"]
+[cli:index:::checking-cli,id="checking-cli"]
 === Checking the Skupper CLI
 
 
@@ -84,7 +76,7 @@ client version {skupper-cli-version}
 ----
 
 // Type: procedure
-[discrete#cli:index:::creating-using-cli,id="creating-using-cli"]
+[cli:index:::creating-using-cli,id="creating-using-cli"]
 === Creating a site using the CLI
 
 A {service-network} consists of Skupper sites.
@@ -123,7 +115,7 @@ By default, the site name defaults to the namespace name, for example, `west`.
 
 
 // Type: reference
-[discrete#cli:index:::custom-sites,id="custom-sites"]
+[cli:index:::custom-sites,id="custom-sites"]
 === Custom sites
 
 The default `skupper init` creates sites that satisfy typical requirements.
@@ -174,7 +166,7 @@ You can use the `--create-network-policy` option to restrict the `database` serv
 --
 
 // Type: procedure
-[discrete#cli:index:::linking-sites,id="linking-sites"]
+[cli:index:::linking-sites,id="linking-sites"]
 === Linking sites
 
 A {service-network} consists of Skupper sites.
@@ -238,7 +230,7 @@ $ skupper link delete <link-name>
 where `<link-name>` is the name of the link specified during creation.
 
 // Type: procedure
-[discrete#cli:index:::link-cost,id="link-cost"]
+[cli:index:::link-cost,id="link-cost"]
 === Specifying link cost
 
 When linking sites, you can assign a cost to each link to influence the traffic flow.
@@ -312,7 +304,7 @@ For example, in a two site network linked with a high cost with servers and clie
 --
 
 // Type: concept
-[discrete#cli:index:::exposing-services-ns,id="exposing-services-ns"]
+[cli:index:::exposing-services-ns,id="exposing-services-ns"]
 === Exposing services on the {service-network} from a namespace
 
 After creating a {service-network}, exposed services can communicate across that network.
@@ -327,7 +319,7 @@ See <<cli:index:::exposing-complex-services>> for instructions.
 
 
 // Type: procedure
-[discrete#cli:index:::exposing-simple-services,id="exposing-simple-services"]
+[cli:index:::exposing-simple-services,id="exposing-simple-services"]
 ==== Exposing simple services on the {service-network}
 This section describes how services can be enabled for a {service-network} for simple use cases.
 
@@ -374,7 +366,7 @@ NOTE: You can specify more than one port by repeating this option.
 NOTE: If you do not specify ports, `skupper` uses the `containerPort` value of the deployment.
 
 // Type: procedure
-[discrete#cli:index:::exposing-complex-services,id="exposing-complex-services"]
+[cli:index:::exposing-complex-services,id="exposing-complex-services"]
 ==== Exposing complex services on the {service-network}
 
 This section describes how services can be enabled for a {service-network} for more complex use cases.
@@ -434,7 +426,7 @@ $ skupper service bind hello-world-backend deployment hello-world-backend
 --
 
 // Type: procedure
-[discrete#cli:index:::exposing-services-from-different-ns,id="exposing-services-from-different-ns"]
+[cli:index:::exposing-services-from-different-ns,id="exposing-services-from-different-ns"]
 ==== Exposing services from a different namespace to the {service-network}
 
 This section shows how to expose a service from a namespace where Skupper is not deployed.
@@ -500,7 +492,7 @@ $ skupper expose deployment/backend --port 8080 --target-namespace east-backend
 --
 
 // Type: concept
-[discrete#cli:index:::exposing-services-local,id="exposing-services-local"]
+[cli:index:::exposing-services-local,id="exposing-services-local"]
 === Exposing services on the {service-network} from a local machine
 
 After creating a {service-network}, you can expose services from a local machine on the {service-network}.
@@ -508,7 +500,7 @@ After creating a {service-network}, you can expose services from a local machine
 For example, if you run a database on a server in your data center, you can deploy a front end in a cluster that can access the data as if the database was running in the cluster.
 
 // Type: procedure
-[discrete#cli:index:::exposing-service-gateway,id="exposing-service-gateway"]
+[cli:index:::exposing-service-gateway,id="exposing-service-gateway"]
 ==== Exposing simple local services to the {service-network}
 
 This section shows how to expose a single service running locally on a {service-network}.
@@ -565,7 +557,7 @@ The URL field shows the underlying communication and can be ignored.
 --
 
 // Type: procedure
-[discrete#cli:index:::exposing-services-gateway,id="exposing-services-gateway"]
+[cli:index:::exposing-services-gateway,id="exposing-services-gateway"]
 ==== Working with complex local services on the {service-network}
 
 
@@ -659,7 +651,7 @@ where
 
 
 // Type: procedure
-[discrete#cli:index:::exporting-gateway,id="exporting-gateway"]
+[cli:index:::exporting-gateway,id="exporting-gateway"]
 ==== Creating a gateway and applying it on a different machine
 
 If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition bundle on the first machine and later apply that definition bundle on a second machine as described in this procedure.
@@ -811,7 +803,7 @@ This shows that there is only one exposed service and that service is only expos
 NOTE: If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
 
 // Type: procedure
-[discrete#cli:index:::gateway-reference,id="gateway-reference"]
+[cli:index:::gateway-reference,id="gateway-reference"]
 ==== Gateway YAML reference
 
 The <<cli:index:::exporting-gateway>> describes how to create a gateway to apply on a separate machine using a gateway definition YAML file.
@@ -849,7 +841,7 @@ qdr-listeners.port:: Port for skupper router, typically `5672`.
 
 
 // Type: procedure
-[discrete#cli:index:::network-service,id='network-service']
+[cli:index:::network-service,id='network-service']
 === Exploring a {service-network}
 
 Skupper includes a command to allow you report all the sites and the services available on a {service-network}.
@@ -936,7 +928,7 @@ $ skupper init --ingress none
 --
 
 // Type: assembly
-[discrete#cli:index:::built-in-security-options,id="built-in-security-options"]
+[cli:index:::built-in-security-options,id="built-in-security-options"]
 === Securing a {service-network}
 
 Skupper provides default, built-in security that scales across clusters and clouds.
@@ -945,7 +937,7 @@ This section describes additional security you can configure.
 See https://skupper.io/skupper/latest/policy/index.html[] for information about creating granular policies for each cluster.
 
 // Type: procedure
-[discrete#cli:index:::network-policy,id="network-policy"]
+[cli:index:::network-policy,id="network-policy"]
 ==== Restricting access to services using network-policy
 
 By default, if you expose a service on the {service-network}, that service is also accessible from other namespaces in the cluster.
@@ -977,7 +969,7 @@ You can now expose services on the {service-network} and those services are not 
 
 
 // Type: procedure
-[discrete#cli:index:::tls,id="tls"]
+[cli:index:::tls,id="tls"]
 ==== Applying TLS to TCP or HTTP2 traffic on the {service-network}
 
 By default, the traffic between sites is encrypted, however the traffic between the service pod and the router pod is not encrypted.
@@ -1058,7 +1050,7 @@ spec:
 . Test calling the service from a TLS enabled frontend.
 
 // Type: reference
-[discrete#cli:index:::protocols,id='protocols']
+[cli:index:::protocols,id='protocols']
 === Supported standards and protocols
 
 Skupper supports the following protocols for your {service-network}:
@@ -1090,7 +1082,7 @@ When choosing which protocol to specify, note the following:
 TCP is implemented as a single streamed message, whereas HTTP1 and HTTP2 are implemented as request/response message routing.
 
 // Type: reference
-[discrete#cli:index:::cli-global-options,id="cli-global-options"]
+[cli:index:::cli-global-options,id="cli-global-options"]
 === CLI options
 
 For a full list of options, see the https://skupper.io/skupper/latest/cli-reference/skupper.html[Kubernetes] and https://skupper.io/skupper/latest/cli-podman/skupper.html[Podman] reference documentation.
@@ -1117,111 +1109,3 @@ $ skupper init --namespace backend
 `--kubeconfig <kubeconfig-path>`:: Path to the kubeconfig file - This allows you run multiple sessions to a cluster from the same client. An alternative is to set the `KUBECONFIG` environment variable.
 
 `--context <context-name>`:: The kubeconfig file can contain defined contexts, and this option allows you to use those contexts.
-
-:!sectids:
-== https://skupper.io/docs/cli/podman.html)[Skupper - Using Skupper podman]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/cli/podman.html#about-skupper-io)[About Skupper podman]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/cli/podman.html#creating-a-site-skupper-io)[Creating a site using Skupper podman]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/cli/podman.html#_linking_sites_using_skupper_podman)[Linking sites using Skupper podman]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/cli/podman.html#_working_with_services_using_skupper_podman)[Working with services using Skupper podman]
-:sectids:
-
-:!sectids:
-== https://skupper.io/docs/console/index.html)[Skupper - Using the Skupper console]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/console/index.html#enabling-console)[Enabling the Skupper console]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/console/index.html#accessing-console)[Accessing the Skupper console]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/console/index.html#exploring-console)[Exploring the Skupper console]
-:sectids:
-
-:!sectids:
-== https://skupper.io/docs/declarative/index.html)[Skupper - Configuring Skupper sites using YAML]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/declarative/index.html#creating-using-yaml)[Creating a Skupper site using YAML]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/declarative/index.html#linking-sites-using-yaml)[Linking sites using YAML]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/declarative/index.html#skupper-annotations)[Configuring services using annotations]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/declarative/index.html#site-config-reference)[Appendix A: Site ConfigMap YAML reference]
-:sectids:
-
-:!sectids:
-== https://skupper.io/docs/troubleshooting/index.html)[Skupper - Troubleshooting a service network]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/troubleshooting/index.html#checking-sites)[Checking sites]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/troubleshooting/index.html#checking-links)[Checking links]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/troubleshooting/index.html#debug-gateways)[Checking gateways]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/troubleshooting/index.html#creating-debug)[Creating a Skupper debug tar file]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/troubleshooting/index.html#router-performance)[Improving Skupper router performance]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/troubleshooting/index.html#common-problems)[Resolving common problems]
-:sectids:
-
-:!sectids:
-== https://skupper.io/docs/policy/index.html)[Skupper - Securing a service network using policies]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/policy/index.html#about-skupper-policies)[About the policy system]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/policy/index.html#upgrading-existing-sites)[Upgrading on a cluster with existing sites]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/policy/index.html#creating-policies)[Creating policies for the policy system]
-:sectids:
-
-:!sectids:
-=== https://skupper.io/docs/policy/index.html#exploring-policies)[Exploring the current policies for a cluster]
-:sectids:
-
-:!sectids:
-== https://skupper.io/docs/operator/index.html#creating-site-using-operator-skupper-io)[Creating a site using the Skupper Operator]
-:sectids:

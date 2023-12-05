@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<meta name="author" content="vlatest">
+<title>Skupper</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body id="index:::" class="book">
+<div id="header">
+<h1>Skupper</h1>
+<div class="details">
+<span id="author" class="author">vlatest</span><br>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#cli:index:::">Skupper - Using the Skupper CLI</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is a preview of <a href="https://github.com/skupperproject/skupper-docs">skupperproject/skupper-docs: Documentation for the Skupper project</a></p>
+</div>
+<div class="paragraph">
+<p>This documentation is built using Antora and contains the following Antora modules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/ROOT">ROOT</a> - Metadata like this page and images</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/cli">cli</a> - Kubernetes and Podman CLI procedures</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/cli-reference">cli-reference</a> - Kubernetes CLI reference (generated)</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/console">console</a> - Console docs</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/declarative">declarative</a> - Using Skupper with YAML</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/overview">overview</a> - Skupper concepts</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/operator">operator</a> - Using Skupper with a Kubernetes operator</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/policy">policy</a> - Control Skupper usage in a cluster using the policy CRD</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/podman-reference">podman-reference</a> - Podman CLI reference (generated)</p>
+</li>
+<li>
+<p><a href="https://github.com/skupperproject/skupper-docs/tree/main/modules/troubleshooting">troubleshooting</a> - Resolving problems in your service network</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This ROOT module is never published but contains partials that are used in various documents.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cli:index:::">Skupper - Using the Skupper CLI</h2>
+<div class="sectionbody">
+<div id="skupper-cli" class="paragraph">
+<p>Using the <code>skupper</code> command-line interface (CLI) allows you to create and manage Skupper sites from the context of the current namespace.</p>
+</div>
+<div class="paragraph">
+<p>A typical workflow is to create a site, link sites together, and expose services to the {service-network}.</p>
+</div>
+<h3 id="cli:index:::checking-cli" class="discrete">Checking the Skupper CLI</h3>
+<div class="paragraph">
+<p>Installing the <code>skupper</code> command-line interface (CLI) provides a simple method to get started with Skupper.</p>
+</div>
+<div class="literalblock">
+<div class="title">Procedure</div>
+<div class="content">
+<pre> // tag::skupper-io[]
+. Follow the instructions for link:/install/index.html[Installing Skupper].
+// end::skupper-io[]
+.
+. Verify the installation.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper version
+client version {skupper-cli-version}</pre>
+</div>
+</div>
+<h3 id="cli:index:::creating-using-cli" class="discrete">Creating a site using the CLI</h3>
+<div class="paragraph">
+<p>A {service-network} consists of Skupper sites.
+This section describes how to create a site using the default settings.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>The <code>skupper</code> CLI is installed.</p>
+</li>
+<li>
+<p>You are logged into the cluster.</p>
+</li>
+<li>
+<p>The services you want to expose on the {service-network} are in the active namespace.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a default site:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting with Skupper release 1.3, the console is not enabled by default.
+To use the new console, which is a preview feature and may change, see <a href="https://skupper.io/skupper/latest/console/index.html" class="bare">https://skupper.io/skupper/latest/console/index.html</a>.</p>
+</div>
+</li>
+<li>
+<p>Check the site:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper status
+
+Skupper is enabled for namespace "west" in interior mode. It is not connected to any other sites.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The default message above is displayed when you initialize a site on a cluster that does not have the policy system installed.
+If you install the policy system as described in <a href="https://skupper.io/skupper/latest/policy/index.html" class="bare">https://skupper.io/skupper/latest/policy/index.html</a>, the message becomes <code>Skupper is enabled for namespace "west" in interior mode (with policies)</code>.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>By default, the site name defaults to the namespace name, for example, <code>west</code>.</p>
+</div>
+<h3 id="cli:index:::custom-sites" class="discrete">Custom sites</h3>
+<div class="paragraph">
+<p>The default <code>skupper init</code> creates sites that satisfy typical requirements.</p>
+</div>
+<div class="paragraph">
+<p>Starting with Skupper release 1.3, the console is not enabled by default.
+To use the new console, which is a preview feature and may change, see <a href="https://skupper.io/skupper/latest/console/index.html" class="bare">https://skupper.io/skupper/latest/console/index.html</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you require a custom configuration, note the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Configuring console authentication.
+There are several <code>skupper</code> options regarding authentication for the console:</p>
+<div class="openblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>--console-auth &lt;authentication-mode&gt;</code></dt>
+<dd>
+<p>Set the authentication mode for the console:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>openshift</code> - Use OpenShift authentication, so that users who have permission to log into OpenShift and view the Project (namespace) can view the console.</p>
+</li>
+<li>
+<p><code>internal</code> -  Use Skupper authentication, see the <code>console-user</code> and <code>console-password</code> options.</p>
+</li>
+<li>
+<p><code>unsecured</code> - No authentication, anyone with the URL can view the console.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1"><code>--console-user &lt;username&gt;</code></dt>
+<dd>
+<p>Username for the console user when authentication mode is set to <code>internal</code>.
+Defaults to <code>admin</code>.</p>
+</dd>
+<dt class="hdlist1"><code>--console-password &lt;password&gt;</code></dt>
+<dd>
+<p>Password for the console user when authentication mode is set to <code>internal</code>.
+If not specified, a random passwords is generated.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Configuring service access</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --create-network-policy</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+All sites are associated with a namespace, called the <em>active namespace</em> in this procedure.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Services in the active namespace may be accessible to pods in other namespaces on that cluster by default, depending on your cluster network policies.
+As a result, you can expose services to pods in namespaces not directly connected to the {service-network}.
+This setting applies a network policy to restrict access to services to those pods in the active namespace.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you create a site in the namespace <code>projectA</code> of <code>clusterA</code> and link that site to a {service-network} where the <code>database</code> service is exposed, the <code>database</code> service is available to pods in <code>projectB</code> of <code>clusterA</code>.</p>
+</div>
+<div class="paragraph">
+<p>You can use the <code>--create-network-policy</code> option to restrict the <code>database</code> service access to <code>projectA</code> of <code>clusterA</code>.</p>
+</div>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="cli:index:::linking-sites" class="discrete">Linking sites</h3>
+<div class="paragraph">
+<p>A {service-network} consists of Skupper sites.
+This section describes how to link sites to form a {service-network}.</p>
+</div>
+<div class="paragraph">
+<p>Linking two sites requires a single initial directional connection. However:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Communication between the two sites is bidirectional, only the initial linking is directional.</p>
+</li>
+<li>
+<p>The choice of direction for linking is typically determined by accessibility. For example, if you are linking an OpenShift Dedicated cluster with a CodeReady Containers cluster, you must link from the CodeReady Containers cluster to the OpenShift Dedicated cluster because that route is accessible.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Determine the direction of the link. If both clusters are publicly addressable, then the direction is not significant. If one of the clusters is addressable from the other cluster, perform step 2 below on the addressable cluster.</p>
+</li>
+<li>
+<p>Generate a token on the cluster that you want to link to:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper token create &lt;filename&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;filename&gt;</code> is the name of a YAML file that is saved on your local filesystem.</p>
+</div>
+<div class="paragraph">
+<p>This file contains a key and the location of the site that created it.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Access to this file provides access to the {service-network}.
+Protect it appropriately.</p>
+</div>
+<div class="paragraph">
+<p>For more information about protecting access to the {service-network}, see <a href="https://skupper.io/skupper/latest/cli/tokens.html" class="bare">https://skupper.io/skupper/latest/cli/tokens.html</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Use a token on the cluster that you want to connect from:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Create a link to the {service-network}:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link create &lt;filename&gt; [-name &lt;link-name&gt;]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;filename&gt;</code> is the name of a YAML file generated from the <code>skupper token create</code> command and <code>&lt;link-name&gt;</code> is the name of the link.</p>
+</div>
+</li>
+<li>
+<p>Check the link:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link status
+Link link1 not connected</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example no &lt;link-name&gt; was specified, the name defaulted to <code>link1</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>If you want to delete a link:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link delete &lt;link-name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;link-name&gt;</code> is the name of the link specified during creation.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="cli:index:::link-cost" class="discrete">Specifying link cost</h3>
+<div class="paragraph">
+<p>When linking sites, you can assign a cost to each link to influence the traffic flow.
+By default, link cost is set to <code>1</code> for a new link.
+In a {service-network}, the routing algorithm attempts to use the path with the lowest total cost from client to target server.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you have services distributed across different sites, you might want a client to favor a particular target or link.
+In this case, you can specify a cost of greater than <code>1</code> on the alternative links to reduce the usage of those links.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The distribution of open connections is statistical, that is, not a round robin system.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>If a connection only traverses one link, then the path cost is equal to the link cost.
+If the connection traverses more than one link, the path cost is the sum of all the links involved in the path.</p>
+</li>
+<li>
+<p>Cost acts as a threshold for using a path from client to server in the network.
+When there is only one path, traffic flows on that path regardless of cost.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If you start with two targets for a service, and one of the targets is no longer available, traffic flows on the remaining path regardless of cost.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>When there are a number of paths from a client to server instances or a service, traffic flows on the lowest cost path until the number of connections exceeds the cost of an alternative path.
+After this threshold of open connections is reached, new connections are spread across the alternative path and the lowest cost path.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Prerequisite</div>
+<ul>
+<li>
+<p>You have set your Kubernetes context to a site that you want to link <em>from</em>.</p>
+</li>
+<li>
+<p>A token for the site that you want to link <em>to</em>.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a link to the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper link create &lt;filename&gt; --cost &lt;integer-cost&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;integer-cost&gt;</code> is an integer greater than 1 and traffic favors lower cost links.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If a service can be called without traversing a link, that service is considered local, with an implicit cost of <code>0</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For example, create a link with cost set to <code>2</code> using a token file named <code>token.yaml</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link create token.yaml --cost 2</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the link cost:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper link status link1 --verbose
+
+ Cost:          2
+ Created:       2022-11-17 15:02:01 +0000 GMT
+ Name:          link1
+ Namespace:     default
+ Site:          default-0d99d031-cee2-4cc6-a761-697fe0f76275
+ Status:        Connected</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Observe traffic using the console.</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>If you have a console on a site, log in and navigate to the processes for each server.
+You can view the traffic levels corresponding to each client.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If there are multiple clients on different sites, filter the view to each client to determine the effect of cost on traffic.
+For example, in a two site network linked with a high cost with servers and clients on both sites, you can see that a client is served by the local servers while a local server is available.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="cli:index:::exposing-services-ns" class="discrete">Exposing services on the {service-network} from a namespace</h3>
+<div class="paragraph">
+<p>After creating a {service-network}, exposed services can communicate across that network.</p>
+</div>
+<div class="paragraph">
+<p>The <code>skupper</code> CLI has two options for exposing services that already exist in a namespace:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>expose</code> supports simple use cases, for example, a deployment with a single service.
+See <a href="#cli:index:::exposing-simple-services">Exposing simple services on the {service-network}</a> for instructions.</p>
+</li>
+<li>
+<p><code>service create</code> and <code>service bind</code> is a more flexible method of exposing services, for example, if you have multiple services for a deployment.
+See <a href="#cli:index:::exposing-complex-services">Exposing complex services on the {service-network}</a> for instructions.</p>
+</li>
+</ul>
+</div>
+<h4 id="cli:index:::exposing-simple-services" class="discrete">Exposing simple services on the {service-network}</h4>
+<div class="paragraph">
+<p>This section describes how services can be enabled for a {service-network} for simple use cases.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a deployment, some pods, or a service in one of your sites, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.</p>
+</div>
+</li>
+<li>
+<p>Create a service that can communicate on the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper expose [deployment &lt;name&gt;|pods &lt;selector&gt;|statefulset &lt;statefulsetname&gt;|service &lt;name&gt;]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of your deployment</p>
+</li>
+<li>
+<p><code>&lt;selector&gt;</code> is a pod selector</p>
+</li>
+<li>
+<p><code>&lt;statefulsetname&gt;</code> is the name of a statefulset</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the example deployment in step 1, you create a service using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose deployment/hello-world-backend --port 8080</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Options for this command include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>--port &lt;port-number&gt;</code>:: Specify the port number that this service is available on the {service-network}.
+NOTE: You can specify more than one port by repeating this option.</p>
+</li>
+<li>
+<p><code>--target-port &lt;port-number&gt;</code>:: Specify the port number of pods that you want to expose.</p>
+</li>
+<li>
+<p><code>--protocol &lt;protocol&gt;</code> allows you specify the protocol you want to use, <code>tcp</code>, <code>http</code> or <code>http2</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If you do not specify ports, <code>skupper</code> uses the <code>containerPort</code> value of the deployment.
+</td>
+</tr>
+</table>
+</div>
+<h4 id="cli:index:::exposing-complex-services" class="discrete">Exposing complex services on the {service-network}</h4>
+<div class="paragraph">
+<p>This section describes how services can be enabled for a {service-network} for more complex use cases.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create a deployment, some pods, or a service in one of your sites, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ kubectl create deployment hello-world-backend --image quay.io/skupper/hello-world-backend</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This step is not Skupper-specific, that is, this process is unchanged from standard processes for your cluster.</p>
+</div>
+</li>
+<li>
+<p>Create a service that can communicate on the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper service create &lt;name&gt; &lt;port&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of the service you want to create</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port the service uses</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the example deployment in step 1, you create a service using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service create hello-world-backend 8080</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Bind the service to a cluster service:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper service bind &lt;service-name&gt; &lt;target-type&gt; &lt;target-name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;service-name&gt;</code> is the name of the service on the {service-network}</p>
+</li>
+<li>
+<p><code>&lt;target-type&gt;</code> is the object you want to expose, <code>deployment</code>, <code>statefulset</code>, <code>pods</code>, or <code>service</code>.</p>
+</li>
+<li>
+<p><code>&lt;target-name&gt;</code> is the name of the cluster service</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the example deployment in step 1, you bind the service using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper service bind hello-world-backend deployment hello-world-backend</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h4 id="cli:index:::exposing-services-from-different-ns" class="discrete">Exposing services from a different namespace to the {service-network}</h4>
+<div class="paragraph">
+<p>This section shows how to expose a service from a namespace where Skupper is not deployed.</p>
+</div>
+<div class="paragraph">
+<p>Skupper allows you expose Kubernetes services from other namespaces for any site.
+However, if you want to expose workloads, for example deployments, you must create a site as described in this section.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>A namespace where Skupper is deployed.</p>
+</li>
+<li>
+<p>A network policy that allows communication between the namespaces</p>
+</li>
+<li>
+<p>cluster-admin permissions if you want to expose resources other than services</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a site with cluster permissions if you want to expose a workload from a namespace other than the site namespace:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper init --enable-cluster-permissions</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Expose the service on the {service-network}:</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The site does not require the extra permissions granted with the <code>--enable-cluster-permissions</code> to expose a Kubernetes service.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If you want to expose a Kubernetes service from a namespace other than the site namespace:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper expose service &lt;service&gt;.&lt;namespace&gt; --address &lt;service&gt;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;service&gt; - the name of the service on the {service-network}.</p>
+</li>
+<li>
+<p>&lt;namespace&gt; - the name of the namespace where the service you want to expose runs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if you deployed Skupper in the <code>east</code> namespace and you created a <code>backend</code> Kubernetes service in the <code>east-backend</code> namespace, you set the context to the <code>east</code> namespace and expose the service as <code>backend</code> on the {service-network} using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose service backend.east-backend --port 8080 --address backend</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>If you want to expose a workload and you created a site with <code>--enable-cluster-permissions</code>:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper expose &lt;resource&gt; --port &lt;port-number&gt; --target-namespace &lt;namespace&gt;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;resource&gt; - the name of the resource.</p>
+</li>
+<li>
+<p>&lt;namespace&gt; - the name of the namespace where the resource you want to expose runs.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, if you deployed Skupper in the <code>east</code> namespace and you created a <code>backend</code> deployment in the <code>east-backend</code> namespace, you set the context to the <code>east</code> namespace and expose the service as <code>backend</code> on the {service-network} using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper expose deployment/backend --port 8080 --target-namespace east-backend</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="cli:index:::exposing-services-local" class="discrete">Exposing services on the {service-network} from a local machine</h3>
+<div class="paragraph">
+<p>After creating a {service-network}, you can expose services from a local machine on the {service-network}.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you run a database on a server in your data center, you can deploy a front end in a cluster that can access the data as if the database was running in the cluster.</p>
+</div>
+<h4 id="cli:index:::exposing-service-gateway" class="discrete">Exposing simple local services to the {service-network}</h4>
+<div class="paragraph">
+<p>This section shows how to expose a single service running locally on a {service-network}.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>A {service-network}. Only one site is required.</p>
+</li>
+<li>
+<p>Access to the {service-network}.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Run your service locally.</p>
+</li>
+<li>
+<p>Log into your cluster and change to the namespace for your site.</p>
+</li>
+<li>
+<p>Expose the service on the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper gateway expose &lt;service&gt; localhost &lt;port&gt;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;service&gt; - the name of the service on the {service-network}.</p>
+</li>
+<li>
+<p>&lt;port&gt; - the port that runs the service locally.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can also expose services from other machines on your local network, for example if MySQL is running on a dedicated server (with an IP address of <code>192.168.1.200</code>), but you are accessing the cluster from a machine in the same network:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway expose mysql 192.168.1.200 3306</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the status of Skupper gateways:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway status
+
+Gateway Definition:
+╰─ machine-user type:service version:{service-version}
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.</p>
+</div>
+<div class="paragraph">
+<p>The URL field shows the underlying communication and can be ignored.</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h4 id="cli:index:::exposing-services-gateway" class="discrete">Working with complex local services on the {service-network}</h4>
+<div class="paragraph">
+<p>This section shows more advanced usage of skupper gateway.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a Skupper gateway:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper gateway init --type &lt;gateway-type&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default a <em>service</em> type gateway is created, however you can also specify:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>podman</code></p>
+</li>
+<li>
+<p><code>docker</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Create a service that can communicate on the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper service create &lt;name&gt; &lt;port&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of the service you want to create</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port the service uses</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper service create mydb 3306</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Bind the service on the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper gateway bind &lt;service&gt; &lt;host&gt; &lt;port&gt;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;service&gt; - the name of the service on the {service-network}, <code>mydb</code> in the example above.</p>
+</li>
+<li>
+<p>&lt;host&gt; - the host that runs the service.</p>
+</li>
+<li>
+<p>&lt;port&gt; - the port the service is running on, <code>3306</code> from the example above.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the status of Skupper gateways:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper gateway status
+Gateway Definitions Summary
+
+Gateway Definition:
+╰─ machine-user type:service version:{service-version}
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.</p>
+</div>
+<div class="paragraph">
+<p>The URL field shows the underlying communication and can be ignored.</p>
+</div>
+<div class="paragraph">
+<p>You can create more services in the {service-network} and bind more local services to expose those services on the {service-network}.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Forward a service from the {service-network} to the local machine.</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper gateway forward &lt;service&gt; &lt;port&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;service&gt;</code> is the name of an existing service on the {service-network}.</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port on the local machine that you want to use.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h4 id="cli:index:::exporting-gateway" class="discrete">Creating a gateway and applying it on a different machine</h4>
+<div class="paragraph">
+<p>If you have access to a cluster from one machine but want to create a gateway to the {service-network} from a different machine, you can create the gateway definition bundle on the first machine and later apply that definition bundle on a second machine as described in this procedure.
+For example, if you want to expose a local database service to the {service-network}, but you never want to access the cluster from the database server, you can use this procedure to create the definition bundle and apply it on the database server.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Log into your cluster from the first machine and change to the namespace for your site.</p>
+</li>
+<li>
+<p>Create a service that can communicate on the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper service create &lt;name&gt; &lt;port&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;name&gt;</code> is the name of the service you want to create</p>
+</li>
+<li>
+<p><code>&lt;port&gt;</code> is the port the service uses</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper service create database 5432</code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Create a YAML file to represent the service you want to expose, for example:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">name: database <b class="conum">(1)</b>
+bindings:
+    - name: database <b class="conum">(2)</b>
+      host: localhost <b class="conum">(3)</b>
+      service:
+        address: database:5432 <b class="conum">(4)</b>
+        protocol: tcp <b class="conum">(5)</b>
+        ports:
+            - 5432 <b class="conum">(6)</b>
+      target_ports:
+        - 5432 <b class="conum">(7)</b>
+qdr-listeners:
+    - name: amqp
+      host: localhost
+      port: 5672</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Gateway name, useful for reference only.</p>
+</li>
+<li>
+<p>Binding name, useful to track multiple bindings.</p>
+</li>
+<li>
+<p>Name of host providing the service you want to expose.</p>
+</li>
+<li>
+<p>Service name and port on {service-network}. You created the service in a previous step.</p>
+</li>
+<li>
+<p>The protocol you want to use to expose the service, <code>tcp</code>, <code>http</code> or <code>http2</code>.</p>
+</li>
+<li>
+<p>The port on the {service-network} that you want this service to be available on.</p>
+</li>
+<li>
+<p>The port of the service running on the host specified in point 3.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Save the YAML file using the name of the gateway, for example, <code>gateway.yaml</code>.</p>
+</li>
+<li>
+<p>Generate a bundle that can be applied to the machine that hosts the service you want to expose on the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper gateway generate-bundle &lt;config-filename&gt; &lt;destination-directory&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&lt;config-filename&gt; - the name of the YAML file, including suffix, that you generated in the previous step.</p>
+</li>
+<li>
+<p>&lt;destination-directory&gt; - the location where you want to save the resulting gateway bundle, for example <code>~/gateways</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper gateway generate-bundle database.yaml ./</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This bundle contains the gateway definition YAML and a  certificate that allow access to the {service-network}.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Copy the gateway definition file, for example, <code>mylaptop-jdoe.tar.gz</code> to the machine that hosts the service you want to expose on the {service-network}.</p>
+</li>
+<li>
+<p>From the machine that hosts the service you want to expose:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ mkdir gateway
+
+$ tar -xvf &lt;gateway-definition-file&gt; --directory gateway
+$ cd gateway
+$ sh ./launch.py</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Use <code>./launch.py -t podman</code> or <code>./launch.py -t docker</code> to run the Skupper router in a container.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Running the gateway bundle uses the gateway definition YAML and a certificate to access and expose the service on the {service-network}.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Check the status of the gateway service:</p>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>To check a <em>service</em> type gateway:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ systemctl --user status &lt;gateway-definition-name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To check a <em>podman</em> type gateway:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ podman inspect</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To check a <em>docker</em> type gateway:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ docker inspect</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+You can later remove the gateway using <code>./remove.py</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>From the machine with cluster access, check the status of Skupper gateways:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper gateway status
+Gateway Definition:
+╰─ machine-user type:service version:{service-version}
+   ╰─ Bindings:
+      ╰─ mydb:3306 tcp mydb:3306 localhost 3306</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This shows that there is only one exposed service and that service is only exposing a single port (BIND). There are no ports forwarded to the local host.</p>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If you need to change the gateway definition, for example to change port, you need to remove the existing gateway and repeat this procedure from the start to redefine the gateway.
+</td>
+</tr>
+</table>
+</div>
+<h4 id="cli:index:::gateway-reference" class="discrete">Gateway YAML reference</h4>
+<div class="paragraph">
+<p>The <a href="#cli:index:::exporting-gateway">Creating a gateway and applying it on a different machine</a> describes how to create a gateway to apply on a separate machine using a gateway definition YAML file.</p>
+</div>
+<div class="paragraph">
+<p>The following are valid entries in a gateway definition YAML file.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">name</dt>
+<dd>
+<p>Name of gateway</p>
+</dd>
+<dt class="hdlist1">bindings.name</dt>
+<dd>
+<p>Name of binding for a single host.</p>
+</dd>
+<dt class="hdlist1">bindings.host</dt>
+<dd>
+<p>Hostname of local service.</p>
+</dd>
+<dt class="hdlist1">bindings.service</dt>
+<dd>
+<p>Definition of service you want to be available on service network.</p>
+</dd>
+<dt class="hdlist1">bindings.service.address</dt>
+<dd>
+<p>Address on the service network, name and port.</p>
+</dd>
+<dt class="hdlist1">bindings.service.protocol</dt>
+<dd>
+<p>Skupper protocol, <code>tcp</code>, <code>http</code> or <code>http2</code>.</p>
+</dd>
+<dt class="hdlist1">bindings.service.ports</dt>
+<dd>
+<p>A single port that becomes available on the service network.</p>
+</dd>
+<dt class="hdlist1">bindings.service.exposeIngress</dt>
+<dd>
+<p>(optional) The traffic direction, <code>ingress</code> or <code>egress</code>.</p>
+</dd>
+<dt class="hdlist1">bindings.service.tlscredentials</dt>
+<dd>
+<p>(optional) The TLS certificate and key for the service.</p>
+</dd>
+<dt class="hdlist1">bindings.service.tlscertauthority</dt>
+<dd>
+<p>(optional) The TLS public certificate.</p>
+</dd>
+<dt class="hdlist1">bindings.target_ports</dt>
+<dd>
+<p>A single port that you want to expose on the service network.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If the local service requires more than one port, create separate bindings for each port.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">forwards.name</dt>
+<dd>
+<p>Name of forward for a single host.</p>
+</dd>
+<dt class="hdlist1">forwards.host</dt>
+<dd>
+<p>Hostname of local service.</p>
+</dd>
+<dt class="hdlist1">forwards.service</dt>
+<dd>
+<p>Definition of service you want to be available locally.</p>
+</dd>
+<dt class="hdlist1">forwards.service.address</dt>
+<dd>
+<p>Address on the service network that you want to use locally, name and port.</p>
+</dd>
+<dt class="hdlist1">forwards.service.protocol</dt>
+<dd>
+<p>Skupper protocol, <code>tcp</code>, <code>http</code> or <code>http2</code>.</p>
+</dd>
+<dt class="hdlist1">forwards.service.ports</dt>
+<dd>
+<p>A single port that is available on the service network.</p>
+</dd>
+<dt class="hdlist1">forwards.target_ports</dt>
+<dd>
+<p>A single port that you want to use locally.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If the network service requires more than one port, create separate forwards for each port.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">qdr-listeners</dt>
+<dd>
+<p>Definition of skupper router listeners</p>
+</dd>
+<dt class="hdlist1">qdr-listeners.name</dt>
+<dd>
+<p>Name of skupper router, typically <code>amqp</code>.</p>
+</dd>
+<dt class="hdlist1">qdr-listeners.host</dt>
+<dd>
+<p>Hostname for skupper router, typically <code>localhost</code>.</p>
+</dd>
+<dt class="hdlist1">qdr-listeners.port</dt>
+<dd>
+<p>Port for skupper router, typically <code>5672</code>.</p>
+</dd>
+</dl>
+</div>
+<h3 id="cli:index:::network-service" class="discrete">Exploring a {service-network}</h3>
+<div class="paragraph">
+<p>Skupper includes a command to allow you report all the sites and the services available on a {service-network}.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>A {service-network} with more than one site</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Set your Kubernetes context to a namespace on the {service-network}.</p>
+</li>
+<li>
+<p>Use the following command to report the status of the {service-network}:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper network status</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Sites:
+├─ [local] 4dba248 - west  <b class="conum">(1)</b>
+│  URL: 10.96.146.236 <b class="conum">(2)</b>
+│  name: west <b class="conum">(3)</b>
+│  namespace: west
+│  version: 0.8.6 <b class="conum">(4)</b>
+│  ╰─ Services:
+│     ╰─ name: hello-world-backend <b class="conum">(5)</b>
+│        address: hello-world-backend: 8080 <b class="conum">(6)</b>
+│        protocol: tcp <b class="conum">(7)</b>
+╰─ [remote] bca99d1 - east <b class="conum">(8)</b>
+   URL:
+   name: east
+   namespace: east
+   sites linked to: 4dba248-west <b class="conum">(9)</b>
+   version: 0.8.6
+   ╰─ Services:
+      ╰─ name: hello-world-backend
+         address: hello-world-backend: 8080
+         protocol: tcp
+         ╰─ Targets:
+            ╰─ name: hello-world-backend-7dfb45b98d-mhskw <b class="conum">(10)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>The unique identifier of the site associated with the current context, that is, the <code>west</code> namespace</p>
+</li>
+<li>
+<p>The URL of the {service-network} router.
+This is required for other sites to connect to this site and is different from the console URL.
+If you require the URL of the console, use the <code>skupper status</code> command to display that URL.</p>
+</li>
+<li>
+<p>The site name.
+By default, skupper uses the name of the current namespace.
+If you want to specify a site name, use <code>skupper init  --site-name &lt;site-name&gt;</code>.</p>
+</li>
+<li>
+<p>The version of Skupper running the site.
+The site version can be different from the current <code>skupper</code> CLI version.
+To update a site to the version of the CLI, use <code>skupper update</code>.</p>
+</li>
+<li>
+<p>The name of a service exposed on the {service-network}.</p>
+</li>
+<li>
+<p>The address of a service exposed on the {service-network}.</p>
+</li>
+<li>
+<p>The protocol of a service exposed on the {service-network}.</p>
+</li>
+<li>
+<p>The unique identifier of a remote site on the {service-network}.</p>
+</li>
+<li>
+<p>The sites that the remote site is linked to.</p>
+</li>
+<li>
+<p>The name of the local Kubernetes object that is exposed on the {service-network}.
+In this example, this is the <code>hello-world-backend</code> pod.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The URL for the east site has no value because that site was initialized without ingress using the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --ingress none</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="cli:index:::built-in-security-options" class="discrete">Securing a {service-network}</h3>
+<div class="paragraph">
+<p>Skupper provides default, built-in security that scales across clusters and clouds.
+This section describes additional security you can configure.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="https://skupper.io/skupper/latest/policy/index.html" class="bare">https://skupper.io/skupper/latest/policy/index.html</a> for information about creating granular policies for each cluster.</p>
+</div>
+<h4 id="cli:index:::network-policy" class="discrete">Restricting access to services using network-policy</h4>
+<div class="paragraph">
+<p>By default, if you expose a service on the {service-network}, that service is also accessible from other namespaces in the cluster.
+You can avoid this situation when creating a site using the <code>--create-network-policy</code> option.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Create the {service-network} router with a network policy:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper init --create-network-policy</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check the site status:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper status</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The output should be similar to the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Skupper enabled for namespace 'west'. It is not connected to any other sites.</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You can now expose services on the {service-network} and those services are not accessible from other namespaces in the cluster.</p>
+</div>
+<h4 id="cli:index:::tls" class="discrete">Applying TLS to TCP or HTTP2 traffic on the {service-network}</h4>
+<div class="paragraph">
+<p>By default, the traffic between sites is encrypted, however the traffic between the service pod and the router pod is not encrypted.
+For services exposed as TCP or HTTP2, the traffic between the pod and the router pod can be encrypted using TLS.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>Two or more linked sites</p>
+</li>
+<li>
+<p>A TCP or HTTP2 frontend and backend service</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Procedure</div>
+<ol class="arabic">
+<li>
+<p>Deploy your backend service.</p>
+</li>
+<li>
+<p>Expose your backend deployment on the {service-network}, enabling TLS.</p>
+<div class="paragraph">
+<p>For example, if you want to expose a TCP service:</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ skupper expose deployment &lt;deployment-name&gt; --port 443 --enable-tls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enabling TLS creates the necessary certificates required for TLS backends and stores them in a secret named <code>skupper-tls-&lt;deployment-name&gt;</code>.</p>
+</div>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Modify the backend deployment to include the generated certificates, for example:</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">...
+    spec:
+      containers:
+      ...
+        command:
+        ...
+        - "/certs/tls.key"
+        - "/certs/tls.crt"
+        ...
+        volumeMounts:
+        ...
+        - mountPath: /certs
+          name: certs
+          readOnly: true
+      volumes:
+      - name: index-html
+        configMap:
+          name: index-html
+      - name: certs
+        secret:
+          secretName: skupper-tls-&lt;deployment-name&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each site creates the necessary certificates required for TLS clients and stores them in a secret named <code>skupper-service-client</code>.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Modify the frontend deployment to include the generated certificates, for example:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">spec:
+  template:
+    spec:
+      containers:
+      ...
+        volumeMounts:
+        - name: certs
+          mountPath: /tmp/certs/skupper-service-client
+      ...
+      volumes:
+      - name: certs
+        secret:
+          secretName: skupper-service-client</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Test calling the service from a TLS enabled frontend.</p>
+</li>
+</ol>
+</div>
+<h3 id="cli:index:::protocols" class="discrete">Supported standards and protocols</h3>
+<div class="paragraph">
+<p>Skupper supports the following protocols for your {service-network}:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>TCP - default</p>
+</li>
+<li>
+<p>HTTP1</p>
+</li>
+<li>
+<p>HTTP2</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When exposing or creating a service, you can specify the protocol, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-bash" data-lang="bash">$ skupper expose deployment hello-world-backend --port 8080 --protocol &lt;protocol&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;protocol&gt;</code> can be:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>tcp</p>
+</li>
+<li>
+<p>http</p>
+</li>
+<li>
+<p>http2</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When choosing which protocol to specify, note the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>tcp</code> supports any protocol overlayed on TCP, for example, HTTP1 and HTTP2 work when you specify <code>tcp</code>.</p>
+</li>
+<li>
+<p>If you specify <code>http</code> or <code>http2</code>, the IP address reported by a client may not be accessible.</p>
+</li>
+<li>
+<p>All {service-network} traffic is converted to AMQP messages in order to traverse the {service-network}.</p>
+<div class="paragraph">
+<p>TCP is implemented as a single streamed message, whereas HTTP1 and HTTP2 are implemented as request/response message routing.</p>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="cli:index:::cli-global-options" class="discrete">CLI options</h3>
+<div class="paragraph">
+<p>For a full list of options, see the <a href="https://skupper.io/skupper/latest/cli-reference/skupper.html">Kubernetes</a> and <a href="https://skupper.io/skupper/latest/cli-podman/skupper.html">Podman</a> reference documentation.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When you create a site and set logging level to <code>trace</code>, you can inadvertently log sensitive information from HTTP headers.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --router-logging trace</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>By default, all <code>skupper</code> commands apply to the cluster you are logged into and the current namespace.
+The following <code>skupper</code> options allow you to override that behavior and apply to all commands:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>--namespace &lt;namespace-name&gt;</code></dt>
+<dd>
+<p>Apply command to <code>&lt;namespace-name&gt;</code>. For example, if you are currently working on <code>frontend</code> namespace and want to initialize a site in the <code>backend</code> namespace:</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ skupper init --namespace backend</pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><code>--kubeconfig &lt;kubeconfig-path&gt;</code></dt>
+<dd>
+<p>Path to the kubeconfig file - This allows you run multiple sessions to a cluster from the same client. An alternative is to set the <code>KUBECONFIG</code> environment variable.</p>
+</dd>
+<dt class="hdlist1"><code>--context &lt;context-name&gt;</code></dt>
+<dd>
+<p>The kubeconfig file can contain defined contexts, and this option allows you to use those contexts.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-12-05 10:25:50 UTC
+</div>
+</div>
+</body>
+</html>
